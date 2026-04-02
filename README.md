@@ -6,7 +6,7 @@ Control your Usenet downloads with natural language through Claude and other MCP
 
 ## Features
 
-- **17 MCP tools** for complete NZBGet control
+- **15 MCP tools** for complete NZBGet control
 - Queue management: list, add, pause, resume, delete downloads
 - History tracking: view completed and failed downloads
 - Speed control: set download rate limits
@@ -63,6 +63,30 @@ Or directly:
 ```bash
 node dist/index.js
 ```
+
+## Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:ui
+```
+
+## Architecture
+
+This MCP server uses a modular architecture:
+
+- `src/tools/*.ts` - Individual tool implementations
+- `src/tools/index.ts` - Tool registry and discovery
+- `src/utils/errors.ts` - Error handling utilities
+- `src/__tests__/mocks/` - Test fixtures and mocks
+
+All 15 tools are self-contained modules that register themselves on import.
 
 ## Configuration
 
