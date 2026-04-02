@@ -298,44 +298,44 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   try {
     switch (name) {
-      case 'nzbget_status': {
-        const status = await client.status();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(status, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_status': {
+      const status = await client.status();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(status, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_list_groups': {
-        const groups = await client.listGroups((args?.logEntries as number) || 0);
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(groups, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_list_groups': {
+      const groups = await client.listGroups((args?.logEntries as number) || 0);
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(groups, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_history': {
-        const history = await client.history((args?.hidden as boolean) || false);
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(history, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_history': {
+      const history = await client.history((args?.hidden as boolean) || false);
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(history, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_append': {
-        const nzbId = await client.append(
+    case 'nzbget_append': {
+      const nzbId = await client.append(
           args?.filename as string,
           args?.content as string,
           (args?.category as string) || '',
@@ -345,161 +345,161 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           (args?.dupeKey as string) || '',
           (args?.dupeScore as number) || 0,
           (args?.dupeMode as string) || 'SCORE'
-        );
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success: nzbId > 0, nzbId }, null, 2),
-            },
-          ],
-        };
-      }
+      );
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success: nzbId > 0, nzbId }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_edit_queue': {
-        const success = await client.editQueue(
+    case 'nzbget_edit_queue': {
+      const success = await client.editQueue(
           args?.command as EditQueueCommand,
           (args?.param as string) || '',
           args?.ids as number[]
-        );
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+      );
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_pause_download': {
-        const success = await client.pauseDownload();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_pause_download': {
+      const success = await client.pauseDownload();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_resume_download': {
-        const success = await client.resumeDownload();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_resume_download': {
+      const success = await client.resumeDownload();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_pause_post': {
-        const success = await client.pausePost();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_pause_post': {
+      const success = await client.pausePost();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_resume_post': {
-        const success = await client.resumePost();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_resume_post': {
+      const success = await client.resumePost();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_rate': {
-        const success = await client.rate(args?.limit as number);
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_rate': {
+      const success = await client.rate(args?.limit as number);
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_log': {
-        const logs = await client.log(
-          (args?.idFrom as number) || 0,
-          (args?.numberOfEntries as number) || 50
-        );
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(logs, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_log': {
+      const logs = await client.log(
+        (args?.idFrom as number) || 0,
+        (args?.numberOfEntries as number) || 50
+      );
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(logs, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_version': {
-        const version = await client.version();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ version }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_version': {
+      const version = await client.version();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ version }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_scan': {
-        const success = await client.scan();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_scan': {
+      const success = await client.scan();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_server_volumes': {
-        const volumes = await client.serverVolumes();
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(volumes, null, 2),
-            },
-          ],
-        };
-      }
+    case 'nzbget_server_volumes': {
+      const volumes = await client.serverVolumes();
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(volumes, null, 2),
+          },
+        ],
+      };
+    }
 
-      case 'nzbget_write_log': {
-        const success = await client.writeLog(
+    case 'nzbget_write_log': {
+      const success = await client.writeLog(
           args?.kind as 'INFO' | 'WARNING' | 'ERROR' | 'DEBUG',
           args?.text as string
-        );
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify({ success }, null, 2),
-            },
-          ],
-        };
-      }
+      );
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({ success }, null, 2),
+          },
+        ],
+      };
+    }
 
-      default:
-        throw new Error(`Unknown tool: ${name}`);
+    default:
+      throw new Error(`Unknown tool: ${name}`);
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
