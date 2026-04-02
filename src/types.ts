@@ -3,6 +3,9 @@
  * Based on NZBGet API documentation (v13.0+)
  */
 
+import type { z } from 'zod';
+import type { NZBGetClient } from './client.js';
+
 // Status response
 export interface NZBGetStatus {
   RemainingSizeLo: number;
@@ -270,4 +273,11 @@ export interface ToolResponse {
     text: string;
   }>;
   isError?: boolean;
+}
+
+export interface ToolDefinition {
+  name: string;
+  description: string;
+  inputSchema: z.ZodTypeAny;
+  handler: (client: NZBGetClient, args: unknown) => Promise<ToolResponse>;
 }
