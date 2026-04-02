@@ -262,3 +262,12 @@ export type EditQueueCommand =
   | 'HistoryMarkBad'
   | 'HistoryMarkGood'
   | 'HistoryMarkSuccess';
+
+// MCP Tool Response Types
+export interface ToolResponse {
+  content: Array<{
+    type: 'text';
+    text: string;
+  }>;
+  isError?: boolean;
+}
